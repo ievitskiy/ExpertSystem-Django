@@ -1,0 +1,24 @@
+{% extends "mbase.html" %}
+{% block entry %}
+    <div class="b-reg" id="enterform">
+    <form action="" method="post" class="b-reg-regform-data" novalidate>
+        <div class="b-reg-regform"> Форма входа</div>
+        {{ form.hidden_tag() }}
+
+        {{ form.username.label(class="b-reg-regform-label") }}<br>
+        {{ form.username(size=32, class="b-reg-regform-space", placeholder="Введите имя пользователя...", type="ttt") }}<br>
+        {% for error in form.username.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+
+        {{ form.password.label(class="b-reg-regform-label") }}<br>
+        {{ form.password(size=32, class="b-reg-regform-space", placeholder="Введите пароль...") }}<br>
+        {% for error in form.password.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+
+        {{ form.remember_me() }} {{ form.remember_me.label(class="b-reg-regform-label") }}<br>
+        {{ form.submit(class="b-reg-regform-sub") }}
+    </form>
+</div>
+{% endblock %}

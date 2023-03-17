@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+<title>ES-PL</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="../../static/styles/style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vollkorn&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;1,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;1,500&family=Oswald&display=swap"
+      rel="stylesheet">
+
+<link rel="stylesheet" type="text/css" href="{{ url_for( 'static', filename='styles/style.css', v=1) }}">
+
+<head>
+</head>
+<body>
+
+<div class="b">
+    <div class="b-mc-header">
+        <div class="b-mc-header-left-side">
+            <a class="b-mc-header-left-side-logo__text">Выбор ЯП</a>
+        </div>
+        <div class="b-mc-header-right-side">
+            <button class="b-mc-header-right-side-enter__text">
+                {% if not current_user.is_authenticated %}
+                    <a class="b-mc-header-right-side-enter__text" href="{{ url_for('entry') }}"> Войти </a>
+                {% else %}
+                    <a class="b-mc-header-right-side-enter__text" href="{{ url_for('logout') }}">Выйти</a>
+                {% endif %}
+            </button>
+            <button class="b-mc-header-right-side__block-reg">
+                <div class="b-mc-header-right-side-reg__text">
+                    <div class="reg_btn">
+                        {% if not current_user.is_authenticated %}
+                            <a href="{{ url_for('register') }}"> Регистрация </a>
+                        {% else %}
+                            {{ current_user.username }}
+                        {% endif %}
+                    </div>
+                </div>
+                {% if not current_user.is_authenticated %}
+                    <img src="../../static/images/v2.png">
+                {% endif %}
+            </button>
+        </div>
+    </div>
+
+    {% if not current_user.is_authenticated %}
+        <div class="b-mc-menu">
+            <a class="b-mc-menu__text">Войдите или зарегистрируйтесь для доступа к функционалу</a>
+        </div>
+    {% else %}
+        <div class="b-mc-menu2">
+            <div class="menubox">
+                <a {% if request.path == "/home" %} class="menuplaceactive" {% else %} class="menuplace" {% endif %}
+                                                    href="{{ url_for('mbase') }}">Домашняя</a>
+                <a {% if request.path == "/question" %} class="menuplaceactive" {% else %} class="menuplace" {% endif %}
+                                                        href="{{ url_for('question') }}">Выбор ЯП</a>
+            </div>
+            <div class="down">
+                <a class="menuplace" href="{{ url_for('download') }}">Скачать результаты</a>
+            </div>
+        </div>
+    {% endif %}
+
+
+
+    {% block maincont %}{% endblock maincont %}
+    {% block question %}{% endblock %}
+</div>
+
+{% block reg %}{% endblock %}
+{% block entry %}{% endblock %}
+
+
+</body>
+<script src="../../static/js/scripts.js"></script>
+</html>

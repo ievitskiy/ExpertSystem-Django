@@ -1,0 +1,37 @@
+{% extends "mbase.html" %}
+
+{% block reg %}
+    <div class="b-realreg" id="regform">
+    <form action="" class="b-reg-regform-data" method="post">
+        <div class="b-reg-regform2"> Форма регистрации</div>
+        {{ regform.hidden_tag() }}
+
+        {{ regform.username.label(class="b-reg-regform-label") }}<br>
+        {{ regform.username(size=32, class="b-reg-regform-space", placeholder="Введите имя пользователя...", type="ttt") }}<br>
+        {% for error in regform.username.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+
+        {{ regform.email.label(class="b-reg-regform-label") }}<br>
+        {{ regform.email(size=64, class="b-reg-regform-space", placeholder="Введите электронную почту...", type="ttt") }}<br>
+        {% for error in regform.email.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+
+        {{ regform.password.label(class="b-reg-regform-label") }}<br>
+        {{ regform.password(size=32, class="b-reg-regform-space", placeholder="Введите пароль...", type="ttt") }}<br>
+        {% for error in regform.password.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+
+        {{ regform.password2.label(class="b-reg-regform-label") }}<br>
+        {{ regform.password2(size=32, class="b-reg-regform-space", placeholder="Повторите пароль...", type="ttt") }}<br>
+        {% for error in regform.password2.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+        <br>
+
+        {{ regform.submit(class="b-reg-regform-sub") }}
+    </form>
+</div>
+{% endblock %}
